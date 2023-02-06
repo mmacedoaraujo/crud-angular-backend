@@ -24,9 +24,10 @@ public class CourseController {
     }
 
     @PostMapping
-    public ResponseEntity<Course> create(@RequestBody Course course) {
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public Course create(@RequestBody Course course) {
         Course newCourse = courseRepository.save(course);
-
-        return new ResponseEntity<>(newCourse, HttpStatus.CREATED);
+        return newCourse;
+//        return new ResponseEntity<>(newCourse, HttpStatus.CREATED);
     }
 }
