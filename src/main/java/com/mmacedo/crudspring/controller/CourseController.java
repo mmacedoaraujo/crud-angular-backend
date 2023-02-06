@@ -3,7 +3,6 @@ package com.mmacedo.crudspring.controller;
 import com.mmacedo.crudspring.model.Course;
 import com.mmacedo.crudspring.repository.CourseRepository;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +22,11 @@ public class CourseController {
 
         return new ResponseEntity<>(allCourses, HttpStatus.OK);
     }
+
     @PostMapping
-    public void create(@RequestBody Course course) {
-        System.out.println(course.getName());
+    public ResponseEntity<Course> create(@RequestBody Course course) {
+        Course newCourse = courseRepository.save(course);
+
+        return new ResponseEntity<>(newCourse, HttpStatus.CREATED);
     }
 }
